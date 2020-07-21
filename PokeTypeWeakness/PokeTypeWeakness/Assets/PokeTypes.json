@@ -1,0 +1,179 @@
+﻿[
+  {
+    "NaturalID": "water",
+    "PrimaryColourHex": "#1AAFE1",
+    "SecondaryColourHex": "#1487B4",
+    "WeaknessNaturalIDs": [
+      "electric",
+      "grass"
+    ]
+  },
+  {
+    "NaturalID": "fire",
+    "PrimaryColourHex": "#F58C1F",
+    "SecondaryColourHex": "#F36F21",
+    "WeaknessNaturalIDs": [
+      "ground",
+      "rock",
+      "water"
+    ]
+  },
+  {
+    "NaturalID": "grass",
+    "PrimaryColourHex": "#54B947",
+    "SecondaryColourHex": "#46A047",
+    "WeaknessNaturalIDs": [
+      "bug",
+      "fire",
+      "flying",
+      "ice",
+      "poison"
+    ]
+  },
+  {
+    "NaturalID": "ground",
+    "PrimaryColourHex": "#78431B",
+    "SecondaryColourHex": "#5B3513",
+    "WeaknessNaturalIDs": [
+      "grass",
+      "ice",
+      "water"
+    ]
+  },
+  {
+    "NaturalID": "rock",
+    "PrimaryColourHex": "#A7A097",
+    "SecondaryColourHex": "#927F6D",
+    "WeaknessNaturalIDs": [
+      "fighting",
+      "grass",
+      "ground",
+      "steel",
+      "water"
+    ]
+  },
+  {
+    "NaturalID": "steel",
+    "PrimaryColourHex": "#533E29",
+    "SecondaryColourHex": "#352413",
+    "WeaknessNaturalIDs": [
+      "fighting",
+      "fire",
+      "ground"
+    ]
+  },
+  {
+    "NaturalID": "ice",
+    "PrimaryColourHex": "#63CDF6",
+    "SecondaryColourHex": "#1AAFE1",
+    "WeaknessNaturalIDs": [
+      "fighting",
+      "fire",
+      "rock",
+      "steel"
+    ]
+  },
+  {
+    "NaturalID": "electric",
+    "PrimaryColourHex": "#F5B915",
+    "SecondaryColourHex": "#F4971E",
+    "WeaknessNaturalIDs": [
+      "ground"
+    ]
+  },
+  {
+    "NaturalID": "dragon",
+    "PrimaryColourHex": "#54B947",
+    "SecondaryColourHex": "#46A047",
+    "WeaknessNaturalIDs": [
+      "dragon",
+      "fairy",
+      "ice"
+    ]
+  },
+  {
+    "NaturalID": "ghost",
+    "PrimaryColourHex": "#8B7E72",
+    "SecondaryColourHex": "#745C44",
+    "WeaknessNaturalIDs": [
+      "dark",
+      "ghost"
+    ]
+  },
+  {
+    "NaturalID": "psychic",
+    "PrimaryColourHex": "#C03695",
+    "SecondaryColourHex": "#B11F83",
+    "WeaknessNaturalIDs": [
+      "bug",
+      "dark",
+      "ghost"
+    ]
+  },
+  {
+    "NaturalID": "normal",
+    "PrimaryColourHex": "#F5B915",
+    "SecondaryColourHex": "#F58C1F",
+    "WeaknessNaturalIDs": [
+      "fighting"
+    ]
+  },
+  {
+    "NaturalID": "fighting",
+    "PrimaryColourHex": "#B92025",
+    "SecondaryColourHex": "#8F191B",
+    "WeaknessNaturalIDs": [
+      "fairy",
+      "flying",
+      "psychic"
+    ]
+  },
+  {
+    "NaturalID": "poison",
+    "PrimaryColourHex": "#B92025",
+    "SecondaryColourHex": "#8F191B",
+    "WeaknessNaturalIDs": [
+      "ground",
+      "psychic"
+    ]
+  },
+  {
+    "NaturalID": "bug",
+    "PrimaryColourHex": "#54B947",
+    "SecondaryColourHex": "#46A047",
+    "WeaknessNaturalIDs": [
+      "fire",
+      "flying",
+      "rock"
+    ]
+  },
+  {
+    "NaturalID": "flying",
+    "PrimaryColourHex": "#1AAFE1",
+    "SecondaryColourHex": "#1487B4",
+    "WeaknessNaturalIDs": [
+      "electric",
+      "ice",
+      "rock"
+    ]
+  },
+  {
+    "NaturalID": "dark",
+    "PrimaryColourHex": "#C03695",
+    "SecondaryColourHex": "#B11F83",
+    "WeaknessNaturalIDs": [
+      "bug",
+      "fairy",
+      "fighting"
+    ]
+  },
+  {
+    "NaturalID": "fairy",
+    "PrimaryColourHex": "#F6E494",
+    "SecondaryColourHex": "#FBCE85",
+    "WeaknessNaturalIDs": [
+      "poison",
+      "steel"
+    ]
+  }
+]

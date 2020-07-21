@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="PokeTypeWeakness.Views.LookupPage"
+             Title="{Binding Title}">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Navigation">#E84848</Color>
+            <Color x:Key="Background">#4D4D4D</Color>
+            <Color x:Key="Foreground">#E6E6E6</Color>
+            <Color x:Key="TextColour">#FFFFFF</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid BackgroundColor="{StaticResource Background}"
+          RowSpacing="0">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="1"
+                BackgroundColor="{StaticResource Navigation}"
+                Text="Test Yourself"
+                ImageSource="pokedex.png"/>
+
+        <RefreshView Grid.Row="0"
+                     IsRefreshing="{Binding IsBusy, Mode=TwoWay}"
+                     Command="{Binding LoadTypesCommand}">
+
+            <CollectionView ItemsSource="{Binding PokeTypes}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="16, 8">
+                            <Grid BackgroundColor="{StaticResource Foreground}"
+                                  ColumnSpacing="0">
+                                
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="8"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="0"
+                                      Padding="16"
+                                      BackgroundColor="{Binding PrimaryColour}"
+                                      HeightRequest="48">
+
+                                    <Image Source="{Binding Image}"/>
+                                </Grid>
+
+                                <Grid Grid.Column="1"
+                                      BackgroundColor="{Binding SecondaryColour}"/>
+
+                                <StackLayout Grid.Column="2"
+                                             BindableLayout.ItemsSource="{Binding Weaknesses}"
+                                             Orientation="Horizontal"
+                                             Margin="8, 0">
+                                    
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame CornerRadius="360"
+                                                   Margin="8, 16, 0, 16"
+                                                   Padding="8"
+                                                   BackgroundColor="{Binding PrimaryColour}">
+                                                
+                                                <Image Source="{Binding Image}"
+                                                       HeightRequest="24"/>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+    
+</ContentPage>
