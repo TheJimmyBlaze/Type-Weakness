@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="PokeTypeWeakness.Views.LookupPage"
+             x:Class="PokeTypeWeakness.Views.TypeLookupPage"
              Title="{Binding Title}">
     
     <ContentPage.Resources>
@@ -16,21 +16,9 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid BackgroundColor="{StaticResource Background}"
-          RowSpacing="0">
+    <Grid BackgroundColor="{StaticResource Background}">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-
-        <Button Grid.Row="1"
-                BackgroundColor="{StaticResource Navigation}"
-                Text="Test Yourself"
-                ImageSource="pokedex.png"/>
-
-        <RefreshView Grid.Row="0"
-                     IsRefreshing="{Binding IsBusy, Mode=TwoWay}"
+        <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}"
                      Command="{Binding LoadTypesCommand}">
 
             <CollectionView ItemsSource="{Binding PokeTypes}">
@@ -75,6 +63,10 @@
                                         </DataTemplate>
                                     </BindableLayout.ItemTemplate>
                                 </StackLayout>
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected"/>
+                                </Grid.GestureRecognizers>
                             </Grid>
                         </Grid>
                     </DataTemplate>

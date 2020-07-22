@@ -30,7 +30,7 @@
     <!-- Your Pages -->
     <TabBar>
         <Tab Title="Lookup" Icon="tab_feed.png">
-            <ShellContent ContentTemplate="{DataTemplate local:LookupPage}" />
+            <ShellContent ContentTemplate="{DataTemplate local:TypeLookupPage}" />
         </Tab>
     </TabBar>
 

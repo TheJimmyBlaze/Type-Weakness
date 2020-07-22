@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="PokeTypeWeakness.Views.TypeDetailPage"
+             Title="{Binding Title}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#E84848</Color>
+            <Color x:Key="Secondary">#974C49</Color>
+            
+            <Color x:Key="AffirmativePrimary">#21B698</Color>
+            <Color x:Key="AffirmativeSecondary">#2AA088</Color>
+            <Color x:Key="NegativePrimary">#E84848</Color>
+            <Color x:Key="NegativeSecondary">#974C49</Color>
+            
+            <Color x:Key="Background">#4D4D4D</Color>
+            <Color x:Key="Foreground">#E6E6E6</Color>
+            <Color x:Key="Highlight">#FFFFFF</Color>
+            <Color x:Key="TextColour">#4D4D4D</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid BackgroundColor="{StaticResource Foreground}"
+          RowSpacing="0">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+              HorizontalOptions="Center"
+              VerticalOptions="Center"
+              ColumnSpacing="0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="24"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0"
+                  Padding="16"
+                  HeightRequest="196"
+                  BackgroundColor="{Binding PokeType.PrimaryColour}">
+
+                <Image Source="{Binding PokeType.Image}"/>
+            </Grid>
+
+            <Grid Grid.Column="1"
+                  BackgroundColor="{Binding PokeType.SecondaryColour}"/>
+        </Grid>
+
+        <StackLayout Grid.Row="1"
+                     Orientation="Vertical"
+                     BackgroundColor="{StaticResource Background}"
+                     Spacing="0">
+
+            <Grid BackgroundColor="{StaticResource Secondary}"
+                  HeightRequest="8"/>
+
+            <Grid BackgroundColor="{StaticResource Primary}">
+                <Label FontSize="Medium"
+                       Margin="16, 8"
+                       TextColor="{StaticResource Highlight}"
+                       Text="{Binding PokeType.DisplayName}"/>
+            </Grid>
+
+            <Grid ColumnSpacing="0"
+                  Margin="16, 64, 16, 16"
+                  BackgroundColor="{StaticResource Foreground}">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0"
+                      Padding="16"
+                      BackgroundColor="{StaticResource AffirmativePrimary}"
+                      HeightRequest="48">
+
+                    <Image Source="strength_icon"/>
+                </Grid>
+
+                <Grid Grid.Column="1"
+                      BackgroundColor="{StaticResource AffirmativeSecondary}"/>
+
+                <StackLayout Grid.Column="2"
+                             Orientation="Vertical">
+
+                    <Grid BackgroundColor="{StaticResource Highlight}"
+                          HorizontalOptions="FillAndExpand">
+                        <Label TextColor="{StaticResource TextColour}"
+                               Margin="8, 0"
+                               Text="{Binding StrengthText}"/>
+                    </Grid>
+
+                    <StackLayout Grid.Column="2"
+                                 BindableLayout.ItemsSource="{Binding PokeType.Strengths}"
+                                 Orientation="Horizontal"
+                                 Margin="8, 0">
+
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame CornerRadius="360"
+                                       Margin="8, 4, 0, 16"
+                                       Padding="8"
+                                       BackgroundColor="{Binding PrimaryColour}">
+
+                                    <Image Source="{Binding Image}"
+                                           HeightRequest="24"/>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+
+            <Grid ColumnSpacing="0"
+                  Margin="16, 0, 16, 64"
+                  BackgroundColor="{StaticResource Foreground}">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0"
+                      Padding="16"
+                      BackgroundColor="{StaticResource NegativePrimary}"
+                      HeightRequest="48">
+
+                    <Image Source="weakness_icon"/>
+                </Grid>
+
+                <Grid Grid.Column="1"
+                      BackgroundColor="{StaticResource NegativeSecondary}"/>
+
+                <StackLayout Grid.Column="2"
+                             Orientation="Vertical">
+
+                    <Grid BackgroundColor="{StaticResource Highlight}"
+                          HorizontalOptions="FillAndExpand">
+                        <Label TextColor="{StaticResource TextColour}"
+                               Margin="8, 0"
+                               Text="{Binding WeaknessText}"/>
+                    </Grid>
+
+                    <StackLayout Grid.Column="2"
+                                 BindableLayout.ItemsSource="{Binding PokeType.Weaknesses}"
+                                 Orientation="Horizontal"
+                                 Margin="8, 0">
+
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame CornerRadius="360"
+                                       Margin="8, 4, 0, 16"
+                                       Padding="8"
+                                       BackgroundColor="{Binding PrimaryColour}">
+
+                                    <Image Source="{Binding Image}"
+                                           HeightRequest="24"/>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+
+    </Grid>
+</ContentPage>

@@ -9,14 +9,14 @@ using Xamarin.Forms;
 
 namespace PokeTypeWeakness.ViewModels
 {
-    public class LookupViewModel: BaseViewModel
+    public class TypeLookupViewModel: BaseViewModel
     {
         public ObservableCollection<PokeType> PokeTypes { get; set; }
         public Command LoadTypesCommand { get; set; }
 
-        public LookupViewModel()
+        public TypeLookupViewModel()
         {
-            Title = "Weaknesses";
+            Title = "Weakness Summary";
             PokeTypes = new ObservableCollection<PokeType>();
             LoadTypesCommand = new Command(async () => await ExecuteLoadTypesCommand());
         }
