@@ -1,4 +1,5 @@
-﻿using PokeTypeWeakness.ViewModels;
+﻿using PokeTypeWeakness.Models;
+using PokeTypeWeakness.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,18 @@ namespace PokeTypeWeakness.Views
             InitializeComponent();
 
             BindingContext = this.viewModel = viewModel;
+        }
+
+        async void OnItemSelected(object sender, EventArgs e)
+        {
+            BindableObject layout = (BindableObject)sender;
+
+            PokeType pokeType = (PokeType)layout.BindingContext;
+            await pokeType.LoadStrengths();
+
+            Page previousPage = Navigation.NavigationStack.Last();
+            await Navigation.PushAsync(new TypeDetailPage(new TypeDetailViewModel(pokeType)));
+            Navigation.RemovePage(previousPage);
         }
     }
 }

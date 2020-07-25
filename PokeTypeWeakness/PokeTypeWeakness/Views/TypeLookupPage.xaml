@@ -9,16 +9,31 @@
     
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Color x:Key="Navigation">#E84848</Color>
+            <Color x:Key="Primary">#E84848</Color>
+            <Color x:Key="Secondary">#974C49</Color>
+
+            <Color x:Key="AffirmativePrimary">#21B698</Color>
+            <Color x:Key="AffirmativeSecondary">#2AA088</Color>
+            <Color x:Key="NegativePrimary">#E84848</Color>
+            <Color x:Key="NegativeSecondary">#974C49</Color>
+
             <Color x:Key="Background">#4D4D4D</Color>
             <Color x:Key="Foreground">#E6E6E6</Color>
+            <Color x:Key="Highlight">#FFFFFF</Color>
             <Color x:Key="TextColour">#FFFFFF</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid BackgroundColor="{StaticResource Background}">
+    <Grid BackgroundColor="{StaticResource Background}"
+          RowSpacing="0">
 
-        <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <RefreshView Grid.Row="0"
+                     IsRefreshing="{Binding IsBusy, Mode=TwoWay}"
                      Command="{Binding LoadTypesCommand}">
 
             <CollectionView ItemsSource="{Binding PokeTypes}">
@@ -34,12 +49,17 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Grid Grid.Column="0"
-                                      Padding="16"
-                                      BackgroundColor="{Binding PrimaryColour}"
-                                      HeightRequest="48">
+                                <Grid Grid.Column="0">
+                                    <Grid>
+                                        <Button BackgroundColor="{Binding PrimaryColour}"
+                                            CornerRadius="0"
+                                            Clicked="OnItemSelected"/>
+                                    </Grid>
 
-                                    <Image Source="{Binding Image}"/>
+                                    <Image Margin="16"
+                                           HeightRequest="48" 
+                                           Source="{Binding Image}"
+                                           InputTransparent="True"/>
                                 </Grid>
 
                                 <Grid Grid.Column="1"
@@ -48,31 +68,59 @@
                                 <StackLayout Grid.Column="2"
                                              BindableLayout.ItemsSource="{Binding Weaknesses}"
                                              Orientation="Horizontal"
-                                             Margin="8, 0">
+                                             Margin="8, 0">  
                                     
                                     <BindableLayout.ItemTemplate>
                                         <DataTemplate>
-                                            <Frame CornerRadius="360"
-                                                   Margin="8, 16, 0, 16"
-                                                   Padding="8"
-                                                   BackgroundColor="{Binding PrimaryColour}">
-                                                
+                                            <Grid WidthRequest="48"
+                                                  HeightRequest="48"
+                                                  VerticalOptions="Center">
+                                                <Frame CornerRadius="360"
+                                                       Padding="0">
+                                                    <Button BackgroundColor="{Binding PrimaryColour}"
+                                                            Clicked="OnItemSelected"/>
+                                                </Frame>
+
                                                 <Image Source="{Binding Image}"
-                                                       HeightRequest="24"/>
-                                            </Frame>
+                                                       WidthRequest="24"
+                                                       HorizontalOptions="Center"
+                                                       VerticalOptions="Center"
+                                                       InputTransparent="True"/>
+                                            </Grid>
                                         </DataTemplate>
                                     </BindableLayout.ItemTemplate>
                                 </StackLayout>
-
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected"/>
-                                </Grid.GestureRecognizers>
                             </Grid>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </RefreshView>
+
+        <StackLayout Grid.Row="1"
+                     Orientation="Vertical"
+                     Spacing="0">
+
+            <Grid BackgroundColor="{StaticResource Secondary}"
+                  HeightRequest="8"/>
+
+            <StackLayout BackgroundColor="{StaticResource Primary}"
+                         Padding="16, 16, 16, 24"
+                         Orientation="Vertical"
+                         Spacing="0">
+                
+                <Button BackgroundColor="{StaticResource AffirmativePrimary}"
+                        TextColor="{StaticResource TextColour}"
+                        Text="Trainer Challenge"
+                        CornerRadius="0"
+                        ImageSource="pokedex_icon"
+                        Padding="24, 4"
+                        Clicked="StartQuiz"/>
+
+                <Grid BackgroundColor="{StaticResource AffirmativeSecondary}"
+                      HeightRequest="8"/>
+            </StackLayout>
+        </StackLayout>
     </Grid>
     
 </ContentPage>

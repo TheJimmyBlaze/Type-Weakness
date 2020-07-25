@@ -32,7 +32,15 @@ namespace PokeTypeWeakness.Views
             PokeType pokeType = (PokeType)layout.BindingContext;
             await pokeType.LoadStrengths();
 
-            await Navigation.PushAsync(new TypeDetailPage(new TypeDetailViewModel(pokeType)));
+            TypeDetailViewModel typeDetailViewModel = new TypeDetailViewModel(pokeType);
+            await Navigation.PushAsync(new TypeDetailPage(typeDetailViewModel));
+        }
+
+        async void StartQuiz(object sender, EventArgs e)
+        {
+            TypeQuizViewModel typeQuizViewModel = null;
+            await Task.Run(() => { typeQuizViewModel = new TypeQuizViewModel(viewModel.PokeTypes); });
+            await Navigation.PushAsync(new TypeQuizPage(typeQuizViewModel));
         }
 
         protected override void OnAppearing()

@@ -13,6 +13,7 @@ namespace PokeTypeWeakness.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<PokeType> DataStore => DependencyService.Get<IDataStore<PokeType>>();
+        public Random random => DependencyService.Get<Random>();
 
         bool isBusy = false;
         public bool IsBusy

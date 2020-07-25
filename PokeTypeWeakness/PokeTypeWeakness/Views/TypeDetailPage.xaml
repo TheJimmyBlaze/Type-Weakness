@@ -107,14 +107,21 @@
 
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
-                                <Frame CornerRadius="360"
-                                       Margin="8, 4, 0, 16"
-                                       Padding="8"
-                                       BackgroundColor="{Binding PrimaryColour}">
+                                <Grid WidthRequest="48"
+                                        HeightRequest="48"
+                                        VerticalOptions="Center">
+                                    <Frame CornerRadius="360"
+                                            Padding="0">
+                                        <Button BackgroundColor="{Binding PrimaryColour}"
+                                                Clicked="OnItemSelected"/>
+                                    </Frame>
 
                                     <Image Source="{Binding Image}"
-                                           HeightRequest="24"/>
-                                </Frame>
+                                            WidthRequest="24"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center"
+                                            InputTransparent="True"/>
+                                </Grid>
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
                     </StackLayout>
@@ -159,14 +166,21 @@
 
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
-                                <Frame CornerRadius="360"
-                                       Margin="8, 4, 0, 16"
-                                       Padding="8"
-                                       BackgroundColor="{Binding PrimaryColour}">
+                                <Grid WidthRequest="48"
+                                        HeightRequest="48"
+                                        VerticalOptions="Center">
+                                    <Frame CornerRadius="360"
+                                            Padding="0">
+                                        <Button BackgroundColor="{Binding PrimaryColour}"
+                                                Clicked="OnItemSelected"/>
+                                    </Frame>
 
                                     <Image Source="{Binding Image}"
-                                           HeightRequest="24"/>
-                                </Frame>
+                                            WidthRequest="24"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center"
+                                            InputTransparent="True"/>
+                                </Grid>
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
                     </StackLayout>

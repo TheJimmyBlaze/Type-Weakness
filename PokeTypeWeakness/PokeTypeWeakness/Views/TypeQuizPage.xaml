@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:converters="clr-namespace:PokeTypeWeakness.Converters"
+             xmlns:viewModels="clr-namespace:PokeTypeWeakness.ViewModels"
+             mc:Ignorable="d"
+             x:Class="PokeTypeWeakness.Views.TypeQuizPage"
+             x:Name="QuizPage"
+             Title="{Binding Title}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#E84848</Color>
+            <Color x:Key="Secondary">#974C49</Color>
+
+            <Color x:Key="AffirmativePrimary">#21B698</Color>
+            <Color x:Key="AffirmativeSecondary">#2AA088</Color>
+            <Color x:Key="NegativePrimary">#E84848</Color>
+            <Color x:Key="NegativeSecondary">#974C49</Color>
+
+            <Color x:Key="Background">#4D4D4D</Color>
+            <Color x:Key="Foreground">#E6E6E6</Color>
+            <Color x:Key="Highlight">#FFFFFF</Color>
+            <Color x:Key="TextColour">#4D4D4D</Color>
+
+            <converters:TypeQuizIsTypeSelectedConverter x:Key="SelectedConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid BackgroundColor="{StaticResource Foreground}"
+          RowSpacing="0">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+              HorizontalOptions="Center"
+              VerticalOptions="Center"
+              ColumnSpacing="0"
+              x:Name="QuizImage">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="24"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0"
+                  Padding="16"
+                  HeightRequest="196"
+                  BackgroundColor="{Binding QuizSubjectType.PrimaryColour}">
+
+                <Image Source="{Binding QuizSubjectType.Image}"/>
+            </Grid>
+
+            <Grid Grid.Column="1"
+                  BackgroundColor="{Binding QuizSubjectType.SecondaryColour}"/>
+        </Grid>
+
+        <StackLayout Grid.Row="1"
+                     Orientation="Vertical"
+                     BackgroundColor="{StaticResource Background}"
+                     Spacing="0">
+
+            <Grid BackgroundColor="{StaticResource Secondary}"
+                  HeightRequest="8"/>
+
+            <Grid BackgroundColor="{StaticResource Primary}">
+                <Label FontSize="Medium"
+                       Margin="16, 8"
+                       TextColor="{StaticResource Highlight}"
+                       Text="{Binding NumberOfWeaknessesText}"
+                       x:Name="WeaknessLabel"/>
+            </Grid>
+
+            <FlexLayout BindableLayout.ItemsSource="{Binding PokeTypes}"
+                        Direction="Row"
+                        AlignContent="Center"
+                        JustifyContent="Center"
+                        Wrap="Wrap"
+                        Margin="0, 8">
+                
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Grid WidthRequest="56"
+                              HeightRequest="56"
+                              Margin="4"
+                              VerticalOptions="Center">
+
+                            <Frame CornerRadius="360"
+                                   Padding="4">
+
+                                <Frame.Style>
+                                    <Style TargetType="Frame">
+                                        <Setter Property="BackgroundColor" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <DataTrigger TargetType="Frame" 
+                                                         Binding="{Binding Elected}"
+                                                         Value="True">
+                                                <Setter Property="BackgroundColor" Value="{StaticResource Highlight}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Frame.Style>
+                                
+                                <Frame CornerRadius="360"
+                                       Padding="0">
+                                    <Button BackgroundColor="{Binding PrimaryColour}"
+                                            Clicked="ElectType"/>
+                                </Frame>
+                            </Frame>
+
+                            <Image Source="{Binding Image}"
+                                   WidthRequest="24"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   InputTransparent="True"/>
+                        </Grid>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </FlexLayout>
+        </StackLayout>
+
+        <StackLayout Grid.Row="2"
+                     Orientation="Vertical"
+                     Spacing="0">
+
+            <Grid BackgroundColor="{StaticResource Secondary}"
+                  HeightRequest="8"/>
+
+            <StackLayout BackgroundColor="{StaticResource Primary}"
+                         Padding="16, 16, 16, 24"
+                         Orientation="Vertical"
+                         Spacing="0">
+
+                <Button BackgroundColor="{StaticResource AffirmativePrimary}"
+                        TextColor="{StaticResource TextColour}"
+                        Text="Submit Answer"
+                        CornerRadius="0"
+                        ImageSource="submit_icon"
+                        Padding="24, 4"
+                        Clicked="Submit"/>
+
+                <Grid BackgroundColor="{StaticResource AffirmativeSecondary}"
+                      HeightRequest="8"/>
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</ContentPage>
