@@ -21,6 +21,11 @@
             <Color x:Key="Foreground">#E6E6E6</Color>
             <Color x:Key="Highlight">#FFFFFF</Color>
             <Color x:Key="TextColour">#FFFFFF</Color>
+
+            <Style TargetType="Frame">
+                <Setter Property="CornerRadius" Value="0"/>
+                <Setter Property="Padding" Value="0"/>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -29,98 +34,90 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="112"/>
         </Grid.RowDefinitions>
 
-        <RefreshView Grid.Row="0"
-                     IsRefreshing="{Binding IsBusy, Mode=TwoWay}"
-                     Command="{Binding LoadTypesCommand}">
+        <CollectionView ItemsSource="{Binding PokeTypes}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnSpacing="0"
+                          Padding="16, 8">
 
-            <CollectionView ItemsSource="{Binding PokeTypes}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Padding="16, 8">
-                            <Grid BackgroundColor="{StaticResource Foreground}"
-                                  ColumnSpacing="0">
-                                
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="8"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="88"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                                <Grid Grid.Column="0">
-                                    <Grid>
-                                        <Button BackgroundColor="{Binding PrimaryColour}"
+                        <Frame Grid.Column="0"
+                               BackgroundColor="{Binding SecondaryColour}"
+                               Padding="0, 0, 8, 0">
+
+                            <Grid>
+                                <Frame>
+                                    <Button BackgroundColor="{Binding PrimaryColour}"
                                             CornerRadius="0"
                                             Clicked="OnItemSelected"/>
-                                    </Grid>
+                                </Frame>
 
-                                    <Image Margin="16"
-                                           HeightRequest="48" 
-                                           Source="{Binding Image}"
-                                           InputTransparent="True"/>
-                                </Grid>
-
-                                <Grid Grid.Column="1"
-                                      BackgroundColor="{Binding SecondaryColour}"/>
-
-                                <StackLayout Grid.Column="2"
-                                             BindableLayout.ItemsSource="{Binding Weaknesses}"
-                                             Orientation="Horizontal"
-                                             Margin="8, 0">  
-                                    
-                                    <BindableLayout.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid WidthRequest="48"
-                                                  HeightRequest="48"
-                                                  VerticalOptions="Center">
-                                                <Frame CornerRadius="360"
-                                                       Padding="0">
-                                                    <Button BackgroundColor="{Binding PrimaryColour}"
-                                                            Clicked="OnItemSelected"/>
-                                                </Frame>
-
-                                                <Image Source="{Binding Image}"
-                                                       WidthRequest="24"
-                                                       HorizontalOptions="Center"
-                                                       VerticalOptions="Center"
-                                                       InputTransparent="True"/>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </BindableLayout.ItemTemplate>
-                                </StackLayout>
+                                <Image Margin="16"
+                                       WidthRequest="48" 
+                                       Source="{Binding Image}"
+                                       InputTransparent="True"/>
                             </Grid>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </RefreshView>
+                        </Frame>
 
-        <StackLayout Grid.Row="1"
-                     Orientation="Vertical"
-                     Spacing="0">
+                        <StackLayout Grid.Column="1"
+                                     BackgroundColor="{StaticResource Foreground}"
+                                     BindableLayout.ItemsSource="{Binding Weaknesses}"
+                                     Orientation="Horizontal"
+                                     Padding="8, 0">
 
-            <Grid BackgroundColor="{StaticResource Secondary}"
-                  HeightRequest="8"/>
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
 
-            <StackLayout BackgroundColor="{StaticResource Primary}"
-                         Padding="16, 16, 16, 24"
-                         Orientation="Vertical"
-                         Spacing="0">
-                
-                <Button BackgroundColor="{StaticResource AffirmativePrimary}"
-                        TextColor="{StaticResource TextColour}"
-                        Text="Trainer Challenge"
-                        CornerRadius="0"
-                        ImageSource="pokedex_icon"
-                        Padding="24, 4"
-                        Clicked="StartQuiz"/>
+                                    <Grid WidthRequest="48"
+                                          HeightRequest="48"
+                                          VerticalOptions="Center">
 
-                <Grid BackgroundColor="{StaticResource AffirmativeSecondary}"
-                      HeightRequest="8"/>
-            </StackLayout>
-        </StackLayout>
+                                        <Frame CornerRadius="360">
+                                            <Button BackgroundColor="{Binding PrimaryColour}"
+                                                    Clicked="OnItemSelected"/>
+                                        </Frame>
+
+                                        <Image Source="{Binding Image}"
+                                               WidthRequest="24"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"
+                                               InputTransparent="True"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Frame Grid.Row="1"
+               BackgroundColor="{StaticResource Secondary}"
+               Padding="0, 8, 0, 0">
+
+            <Frame BackgroundColor="{StaticResource Primary}"
+                   Padding="16, 16, 16, 24">
+
+                <Frame BackgroundColor="{StaticResource AffirmativeSecondary}"
+                       Padding="0, 0, 0, 8">
+                    
+                    <Button BackgroundColor="{StaticResource AffirmativePrimary}"
+                            TextColor="{StaticResource TextColour}"
+                            Text="Trainer Challenge"
+                            CornerRadius="0"
+                            ImageSource="pokedex_icon"
+                            Padding="24, 4"
+                            Clicked="StartQuiz"/>
+                </Frame>
+            </Frame>
+        </Frame>
     </Grid>
     
 </ContentPage>

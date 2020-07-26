@@ -9,7 +9,7 @@ using Android.OS;
 
 namespace PokeTypeWeakness.Droid
 {
-    [Activity(Label = "PokeTypeWeakness", Icon = "@mipmap/icon", Theme = "@style/MainTheme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Pokemon Type Weaknesses", Icon = "@drawable/pokemon_icon", Theme = "@style/MainTheme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -21,6 +21,7 @@ namespace PokeTypeWeakness.Droid
             OverrideUI();
 
             global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
+
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());

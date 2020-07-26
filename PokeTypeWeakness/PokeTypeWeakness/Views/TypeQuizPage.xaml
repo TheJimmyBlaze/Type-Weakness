@@ -23,9 +23,14 @@
             <Color x:Key="Background">#4D4D4D</Color>
             <Color x:Key="Foreground">#E6E6E6</Color>
             <Color x:Key="Highlight">#FFFFFF</Color>
-            <Color x:Key="TextColour">#4D4D4D</Color>
+            <Color x:Key="TextColour">#FFFFFF</Color>
 
             <converters:TypeQuizIsTypeSelectedConverter x:Key="SelectedConverter"/>
+
+            <Style TargetType="Frame">
+                <Setter Property="CornerRadius" Value="0"/>
+                <Setter Property="Padding" Value="0"/>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -35,49 +40,50 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="112"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0"
-              HorizontalOptions="Center"
-              VerticalOptions="Center"
-              ColumnSpacing="0"
-              x:Name="QuizImage">
+        <Frame Grid.Row="0"
+               Padding="0, 0, 16, 0"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               BackgroundColor="{Binding QuizSubjectType.SecondaryColour}"
+               x:Name="QuizImage">
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="24"/>
-            </Grid.ColumnDefinitions>
+            <Frame Grid.Column="0"
+                   Padding="16"
+                   BackgroundColor="{Binding QuizSubjectType.PrimaryColour}">
 
-            <Grid Grid.Column="0"
-                  Padding="16"
-                  HeightRequest="196"
-                  BackgroundColor="{Binding QuizSubjectType.PrimaryColour}">
+                <Image WidthRequest="196"
+                       Source="{Binding QuizSubjectType.Image}"/>
+            </Frame>
+        </Frame>
 
-                <Image Source="{Binding QuizSubjectType.Image}"/>
-            </Grid>
+        <Grid Grid.Row="1"
+              BackgroundColor="{StaticResource Background}"
+              RowSpacing="0">
 
-            <Grid Grid.Column="1"
-                  BackgroundColor="{Binding QuizSubjectType.SecondaryColour}"/>
-        </Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="56"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <StackLayout Grid.Row="1"
-                     Orientation="Vertical"
-                     BackgroundColor="{StaticResource Background}"
-                     Spacing="0">
+            <Frame Grid.Row="0" 
+                   Padding="0, 8, 0, 0"
+                   BackgroundColor="{StaticResource Secondary}">
 
-            <Grid BackgroundColor="{StaticResource Secondary}"
-                  HeightRequest="8"/>
+                <Frame BackgroundColor="{StaticResource Primary}">
 
-            <Grid BackgroundColor="{StaticResource Primary}">
-                <Label FontSize="Medium"
-                       Margin="16, 8"
-                       TextColor="{StaticResource Highlight}"
-                       Text="{Binding NumberOfWeaknessesText}"
-                       x:Name="WeaknessLabel"/>
-            </Grid>
+                    <Label FontSize="Medium"
+                           Margin="16, 8"
+                           TextColor="{StaticResource Highlight}"
+                           Text="{Binding NumberOfWeaknessesText}"
+                           x:Name="WeaknessLabel"/>
+                </Frame>
+            </Frame>
 
-            <FlexLayout BindableLayout.ItemsSource="{Binding PokeTypes}"
+            <FlexLayout Grid.Row="1" 
+                        BindableLayout.ItemsSource="{Binding PokeTypes}"
                         Direction="Row"
                         AlignContent="Center"
                         JustifyContent="Center"
@@ -86,6 +92,7 @@
                 
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
+                        
                         <Grid WidthRequest="56"
                               HeightRequest="56"
                               Margin="4"
@@ -107,8 +114,7 @@
                                     </Style>
                                 </Frame.Style>
                                 
-                                <Frame CornerRadius="360"
-                                       Padding="0">
+                                <Frame CornerRadius="360">
                                     <Button BackgroundColor="{Binding PrimaryColour}"
                                             Clicked="ElectType"/>
                                 </Frame>
@@ -120,34 +126,32 @@
                                    VerticalOptions="Center"
                                    InputTransparent="True"/>
                         </Grid>
+                        
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </FlexLayout>
-        </StackLayout>
+        </Grid>
 
-        <StackLayout Grid.Row="2"
-                     Orientation="Vertical"
-                     Spacing="0">
+        <Frame Grid.Row="2"
+               BackgroundColor="{StaticResource Secondary}"
+               Padding="0, 8, 0, 0">
 
-            <Grid BackgroundColor="{StaticResource Secondary}"
-                  HeightRequest="8"/>
+            <Frame BackgroundColor="{StaticResource Primary}"
+                   Padding="16, 16, 16, 24">
 
-            <StackLayout BackgroundColor="{StaticResource Primary}"
-                         Padding="16, 16, 16, 24"
-                         Orientation="Vertical"
-                         Spacing="0">
+                <Frame BackgroundColor="{StaticResource AffirmativeSecondary}"
+                       Padding="0, 0, 0, 8">
 
-                <Button BackgroundColor="{StaticResource AffirmativePrimary}"
-                        TextColor="{StaticResource TextColour}"
-                        Text="Submit Answer"
-                        CornerRadius="0"
-                        ImageSource="submit_icon"
-                        Padding="24, 4"
-                        Clicked="Submit"/>
-
-                <Grid BackgroundColor="{StaticResource AffirmativeSecondary}"
-                      HeightRequest="8"/>
-            </StackLayout>
-        </StackLayout>
+                    <Button BackgroundColor="{StaticResource AffirmativePrimary}"
+                            TextColor="{StaticResource TextColour}"
+                            Text="Submit Answer"
+                            CornerRadius="0"
+                            ImageSource="submit_icon"
+                            Padding="24, 4"
+                            Clicked="Submit"/>
+                </Frame>
+            </Frame>
+        </Frame>
+        
     </Grid>
 </ContentPage>

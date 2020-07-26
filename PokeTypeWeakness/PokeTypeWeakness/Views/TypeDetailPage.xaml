@@ -21,6 +21,11 @@
             <Color x:Key="Foreground">#E6E6E6</Color>
             <Color x:Key="Highlight">#FFFFFF</Color>
             <Color x:Key="TextColour">#4D4D4D</Color>
+
+            <Style TargetType="Frame">
+                <Setter Property="CornerRadius" Value="0"/>
+                <Setter Property="Padding" Value="0"/>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -29,78 +34,85 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="312"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0"
-              HorizontalOptions="Center"
-              VerticalOptions="Center"
-              ColumnSpacing="0">
+        <Frame Grid.Row="0"
+               Padding="0, 0, 16, 0"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               BackgroundColor="{Binding PokeType.SecondaryColour}">
+            
+            <Frame Padding="16"
+                   BackgroundColor="{Binding PokeType.PrimaryColour}">
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="24"/>
-            </Grid.ColumnDefinitions>
+                <Image WidthRequest="196"
+                       Source="{Binding PokeType.Image}"/>
+            </Frame>
+        </Frame>
 
-            <Grid Grid.Column="0"
-                  Padding="16"
-                  HeightRequest="196"
-                  BackgroundColor="{Binding PokeType.PrimaryColour}">
+        <Grid Grid.Row="1"
+              BackgroundColor="{StaticResource Background}"
+              RowSpacing="16">
 
-                <Image Source="{Binding PokeType.Image}"/>
-            </Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="56"/>
+                <RowDefinition Height="96"/>
+                <RowDefinition Height="96"/>
+            </Grid.RowDefinitions>
 
-            <Grid Grid.Column="1"
-                  BackgroundColor="{Binding PokeType.SecondaryColour}"/>
-        </Grid>
+            <Frame Grid.Row="0" 
+                   Padding="0, 8, 0, 0"
+                   BackgroundColor="{StaticResource Secondary}">
+                
+                <Frame BackgroundColor="{StaticResource Primary}">
+                    
+                    <Label FontSize="Medium"
+                           Margin="16, 8"
+                           TextColor="{StaticResource Highlight}"
+                           Text="{Binding PokeType.DisplayName}"/>
+                </Frame>
+            </Frame>
 
-        <StackLayout Grid.Row="1"
-                     Orientation="Vertical"
-                     BackgroundColor="{StaticResource Background}"
-                     Spacing="0">
-
-            <Grid BackgroundColor="{StaticResource Secondary}"
-                  HeightRequest="8"/>
-
-            <Grid BackgroundColor="{StaticResource Primary}">
-                <Label FontSize="Medium"
-                       Margin="16, 8"
-                       TextColor="{StaticResource Highlight}"
-                       Text="{Binding PokeType.DisplayName}"/>
-            </Grid>
-
-            <Grid ColumnSpacing="0"
-                  Margin="16, 64, 16, 16"
+            <Grid Grid.Row="1" 
+                  ColumnSpacing="0"
+                  Margin="16, 0"
                   BackgroundColor="{StaticResource Foreground}">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="98"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0"
-                      Padding="16"
-                      BackgroundColor="{StaticResource AffirmativePrimary}"
-                      HeightRequest="48">
+                <Frame BackgroundColor="{StaticResource AffirmativeSecondary}"
+                       Padding="0, 0, 8, 0">
 
-                    <Image Source="strength_icon"/>
-                </Grid>
+                    <Frame Grid.Column="0"
+                           Padding="16"
+                           BackgroundColor="{StaticResource AffirmativePrimary}">
+
+                        <Image Source="strength_icon"/>
+                    </Frame>
+                </Frame>
 
                 <Grid Grid.Column="1"
-                      BackgroundColor="{StaticResource AffirmativeSecondary}"/>
+                      RowSpacing="0">
 
-                <StackLayout Grid.Column="2"
-                             Orientation="Vertical">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                    <Grid BackgroundColor="{StaticResource Highlight}"
-                          HorizontalOptions="FillAndExpand">
+                    <Frame Grid.Row="0" 
+                           BackgroundColor="{StaticResource Highlight}"
+                           HorizontalOptions="FillAndExpand">
+                        
                         <Label TextColor="{StaticResource TextColour}"
                                Margin="8, 0"
                                Text="{Binding StrengthText}"/>
-                    </Grid>
+                    </Frame>
 
-                    <StackLayout Grid.Column="2"
+                    <StackLayout Grid.Row="1"
                                  BindableLayout.ItemsSource="{Binding PokeType.Strengths}"
                                  Orientation="Horizontal"
                                  Margin="8, 0">
@@ -108,10 +120,9 @@
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
                                 <Grid WidthRequest="48"
-                                        HeightRequest="48"
-                                        VerticalOptions="Center">
-                                    <Frame CornerRadius="360"
-                                            Padding="0">
+                                      HeightRequest="48"
+                                      VerticalOptions="Center">
+                                    <Frame CornerRadius="360">
                                         <Button BackgroundColor="{Binding PrimaryColour}"
                                                 Clicked="OnItemSelected"/>
                                     </Frame>
@@ -125,41 +136,48 @@
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
                     </StackLayout>
-                </StackLayout>
+                </Grid>
             </Grid>
 
-            <Grid ColumnSpacing="0"
-                  Margin="16, 0, 16, 64"
+            <Grid Grid.Row="2" 
+                  ColumnSpacing="0"
+                  Margin="16, 0"
                   BackgroundColor="{StaticResource Foreground}">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="98"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0"
-                      Padding="16"
-                      BackgroundColor="{StaticResource NegativePrimary}"
-                      HeightRequest="48">
+                <Frame BackgroundColor="{StaticResource NegativeSecondary}"
+                       Padding="0, 0, 8, 0">
 
-                    <Image Source="weakness_icon"/>
-                </Grid>
+                    <Frame Grid.Column="0"
+                           Padding="16"
+                           BackgroundColor="{StaticResource NegativePrimary}">
+
+                        <Image Source="weakness_icon"/>
+                    </Frame>
+                </Frame>
 
                 <Grid Grid.Column="1"
-                      BackgroundColor="{StaticResource NegativeSecondary}"/>
+                      RowSpacing="0">
 
-                <StackLayout Grid.Column="2"
-                             Orientation="Vertical">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                    <Grid BackgroundColor="{StaticResource Highlight}"
-                          HorizontalOptions="FillAndExpand">
+                    <Frame Grid.Row="0" 
+                           BackgroundColor="{StaticResource Highlight}"
+                           HorizontalOptions="FillAndExpand">
+
                         <Label TextColor="{StaticResource TextColour}"
                                Margin="8, 0"
-                               Text="{Binding WeaknessText}"/>
-                    </Grid>
+                               Text="{Binding StrengthText}"/>
+                    </Frame>
 
-                    <StackLayout Grid.Column="2"
+                    <StackLayout Grid.Row="1"
                                  BindableLayout.ItemsSource="{Binding PokeType.Weaknesses}"
                                  Orientation="Horizontal"
                                  Margin="8, 0">
@@ -167,10 +185,9 @@
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
                                 <Grid WidthRequest="48"
-                                        HeightRequest="48"
-                                        VerticalOptions="Center">
-                                    <Frame CornerRadius="360"
-                                            Padding="0">
+                                      HeightRequest="48"
+                                      VerticalOptions="Center">
+                                    <Frame CornerRadius="360">
                                         <Button BackgroundColor="{Binding PrimaryColour}"
                                                 Clicked="OnItemSelected"/>
                                     </Frame>
@@ -184,9 +201,9 @@
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
                     </StackLayout>
-                </StackLayout>
+                </Grid>
             </Grid>
-        </StackLayout>
+        </Grid>
 
     </Grid>
 </ContentPage>

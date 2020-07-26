@@ -21,8 +21,8 @@ namespace PokeTypeWeakness.Models
 
         public string[] WeaknessNaturalIDs { get; set; }
 
-        public Color PrimaryColour { get { return Color.FromHex(PrimaryColourHex); } }
-        public Color SecondaryColour { get { return Color.FromHex(SecondaryColourHex); } }
+        public Color PrimaryColour { get { return CalculateColour(PrimaryColourHex); } }
+        public Color SecondaryColour { get { return CalculateColour(SecondaryColourHex); } }
 
         public string Image { get { return string.Format("{0}.png", NaturalID); } }
         public string DisplayName { get { return string.Format("{0}{1}", NaturalID.Substring(0, 1).ToUpper(), NaturalID.Substring(1)); } }
@@ -59,6 +59,13 @@ namespace PokeTypeWeakness.Models
                 PokeType weakness = await DataStore.GetItemAsync(weaknessNaturalID);
                 Weaknesses.Add(weakness);
             }
+        }
+
+        Color CalculateColour(string colourHex)
+        {
+            if (string.IsNullOrEmpty(colourHex))
+                return Color.Transparent;
+            return Color.FromHex(colourHex);
         }
     }
 }

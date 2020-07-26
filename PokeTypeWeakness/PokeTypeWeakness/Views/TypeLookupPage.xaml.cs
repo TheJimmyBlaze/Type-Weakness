@@ -42,13 +42,5 @@ namespace PokeTypeWeakness.Views
             await Task.Run(() => { typeQuizViewModel = new TypeQuizViewModel(viewModel.PokeTypes); });
             await Navigation.PushAsync(new TypeQuizPage(typeQuizViewModel));
         }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            if (viewModel.PokeTypes.Count == 0)
-                viewModel.IsBusy = true;
-        }
     }
 }

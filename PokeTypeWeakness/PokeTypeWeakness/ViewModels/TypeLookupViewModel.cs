@@ -12,36 +12,22 @@ namespace PokeTypeWeakness.ViewModels
     public class TypeLookupViewModel: BaseViewModel
     {
         public ObservableCollection<PokeType> PokeTypes { get; set; }
-        public Command LoadTypesCommand { get; set; }
 
         public TypeLookupViewModel()
         {
             Title = "Weakness Summary";
             PokeTypes = new ObservableCollection<PokeType>();
-            LoadTypesCommand = new Command(async () => await ExecuteLoadTypesCommand());
+            ExecuteLoadTypesCommand();
         }
 
-        private async Task ExecuteLoadTypesCommand()
+        private async void ExecuteLoadTypesCommand()
         {
-            IsBusy = true;
-
-            try
+            PokeTypes.Clear();
+            IEnumerable<PokeType> pokeTypes = await DataStore.GetItemsAsync();
+            foreach (PokeType pokeType in pokeTypes)
             {
-                PokeTypes.Clear();
-                IEnumerable<PokeType> pokeTypes = await DataStore.GetItemsAsync();
-                foreach (PokeType pokeType in pokeTypes)
-                {
-                    await pokeType.LoadWeaknesses();
-                    PokeTypes.Add(pokeType);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                IsBusy = false;
+                await pokeType.LoadWeaknesses();
+                PokeTypes.Add(pokeType);
             }
         }
     }
