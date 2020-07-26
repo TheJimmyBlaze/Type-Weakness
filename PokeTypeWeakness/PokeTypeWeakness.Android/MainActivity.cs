@@ -6,10 +6,11 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Content.Res;
 
 namespace PokeTypeWeakness.Droid
 {
-    [Activity(Label = "Pokemon Type Weaknesses", Icon = "@drawable/pokemon_icon", Theme = "@style/MainTheme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Pokemon Type Weaknesses", Icon = "@mipmap/pokemon_icon", Theme = "@style/MainTheme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -23,6 +24,7 @@ namespace PokeTypeWeakness.Droid
             global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            Android.Gms.Ads.MobileAds.Initialize(ApplicationContext, "ca-app-pub-8758740980137529~7003158011");
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
         }

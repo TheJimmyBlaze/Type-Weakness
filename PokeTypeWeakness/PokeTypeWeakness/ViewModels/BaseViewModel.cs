@@ -15,6 +15,9 @@ namespace PokeTypeWeakness.ViewModels
         public IDataStore<PokeType> DataStore => DependencyService.Get<IDataStore<PokeType>>();
         public Random random => DependencyService.Get<Random>();
 
+        private const string AD_UNIT_ID = "ca-app-pub-8758740980137529/7549952927";
+        public string AdUnitID { get { return AD_UNIT_ID; } }
+
         string title = string.Empty;
         public string Title
         {

@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:converters="clr-namespace:PokeTypeWeakness.Converters"
-             xmlns:viewModels="clr-namespace:PokeTypeWeakness.ViewModels"
+             xmlns:converters="clr-namespace:PokeTypeWeakness.Converters" xmlns:views="clr-namespace:PokeTypeWeakness.Views"
              mc:Ignorable="d"
              x:Class="PokeTypeWeakness.Views.TypeQuizPage"
              x:Name="QuizPage"
@@ -19,6 +18,9 @@
             <Color x:Key="AffirmativeSecondary">#2AA088</Color>
             <Color x:Key="NegativePrimary">#E84848</Color>
             <Color x:Key="NegativeSecondary">#974C49</Color>
+
+            <Color x:Key="AdPrimary">#000000</Color>
+            <Color x:Key="AdSecondary">#FFFFFF</Color>
 
             <Color x:Key="Background">#4D4D4D</Color>
             <Color x:Key="Foreground">#E6E6E6</Color>
@@ -38,12 +40,21 @@
           RowSpacing="0">
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="96"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="112"/>
         </Grid.RowDefinitions>
 
-        <Frame Grid.Row="0"
+        <Frame Grid.Row="0" 
+               BackgroundColor="{StaticResource AdSecondary}"
+               Padding="0, 0, 0, 8">
+
+            <views:AdMobView AdUnitId="{Binding AdUnitID}"
+                            BackgroundColor="{StaticResource AdPrimary}"/>
+        </Frame>
+
+        <Frame Grid.Row="1"
                Padding="0, 0, 16, 0"
                HorizontalOptions="Center"
                VerticalOptions="Center"
@@ -59,7 +70,7 @@
             </Frame>
         </Frame>
 
-        <Grid Grid.Row="1"
+        <Grid Grid.Row="2"
               BackgroundColor="{StaticResource Background}"
               RowSpacing="0">
 
@@ -132,7 +143,7 @@
             </FlexLayout>
         </Grid>
 
-        <Frame Grid.Row="2"
+        <Frame Grid.Row="3"
                BackgroundColor="{StaticResource Secondary}"
                Padding="0, 8, 0, 0">
 

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
-    <AssemblyName>Pokemon Type Weaknesses</AssemblyName>
+    <AssemblyName>PokeTypeWeakness</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

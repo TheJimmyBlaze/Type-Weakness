@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:views="clr-namespace:PokeTypeWeakness.Views"
              mc:Ignorable="d"
              x:Class="PokeTypeWeakness.Views.TypeDetailPage"
              Title="{Binding Title}">
@@ -16,6 +16,9 @@
             <Color x:Key="AffirmativeSecondary">#2AA088</Color>
             <Color x:Key="NegativePrimary">#E84848</Color>
             <Color x:Key="NegativeSecondary">#974C49</Color>
+
+            <Color x:Key="AdPrimary">#000000</Color>
+            <Color x:Key="AdSecondary">#FFFFFF</Color>
             
             <Color x:Key="Background">#4D4D4D</Color>
             <Color x:Key="Foreground">#E6E6E6</Color>
@@ -33,11 +36,20 @@
           RowSpacing="0">
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="96"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="312"/>
         </Grid.RowDefinitions>
+        
+        <Frame Grid.Row="0" 
+               BackgroundColor="{StaticResource AdSecondary}"
+               Padding="0, 0, 0, 8">
 
-        <Frame Grid.Row="0"
+            <views:AdMobView AdUnitId="{Binding AdUnitID}"
+                            BackgroundColor="{StaticResource AdPrimary}"/>
+        </Frame>
+
+        <Frame Grid.Row="1"
                Padding="0, 0, 16, 0"
                HorizontalOptions="Center"
                VerticalOptions="Center"
@@ -51,7 +63,7 @@
             </Frame>
         </Frame>
 
-        <Grid Grid.Row="1"
+        <Grid Grid.Row="2"
               BackgroundColor="{StaticResource Background}"
               RowSpacing="16">
 
