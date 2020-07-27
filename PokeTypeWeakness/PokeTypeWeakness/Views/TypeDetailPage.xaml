@@ -36,17 +36,17 @@
           RowSpacing="0">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="96"/>
+            <RowDefinition Height="98"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="312"/>
         </Grid.RowDefinitions>
-        
+
         <Frame Grid.Row="0" 
                BackgroundColor="{StaticResource AdSecondary}"
                Padding="0, 0, 0, 8">
 
             <views:AdMobView AdUnitId="{Binding AdUnitID}"
-                            BackgroundColor="{StaticResource AdPrimary}"/>
+                             BackgroundColor="{StaticResource AdPrimary}"/>
         </Frame>
 
         <Frame Grid.Row="1"
@@ -186,7 +186,7 @@
 
                         <Label TextColor="{StaticResource TextColour}"
                                Margin="8, 0"
-                               Text="{Binding StrengthText}"/>
+                               Text="{Binding WeaknessText}"/>
                     </Frame>
 
                     <StackLayout Grid.Row="1"

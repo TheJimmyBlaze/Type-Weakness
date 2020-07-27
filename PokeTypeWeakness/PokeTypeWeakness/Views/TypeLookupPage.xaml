@@ -36,7 +36,7 @@
           RowSpacing="0">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="96"/>
+            <RowDefinition Height="98"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="112"/>
         </Grid.RowDefinitions>
@@ -46,7 +46,7 @@
                Padding="0, 0, 0, 8">
 
             <views:AdMobView AdUnitId="{Binding AdUnitID}"
-                            BackgroundColor="{StaticResource AdPrimary}"/>
+                             BackgroundColor="{StaticResource AdPrimary}"/>
         </Frame>
 
         <CollectionView Grid.Row="1" 

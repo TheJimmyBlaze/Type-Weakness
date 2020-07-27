@@ -1,0 +1,41 @@
+{
+  "project_info": {
+    "project_number": "563709567668",
+    "firebase_url": "https://pokemon-type-weaknesses.firebaseio.com",
+    "project_id": "pokemon-type-weaknesses",
+    "storage_bucket": "pokemon-type-weaknesses.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:563709567668:android:7c5a37ea6eadd0c2582de1",
+        "android_client_info": {
+          "package_name": "thejimmyblaze.github.poketypeweakness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "563709567668-hq4j13140l6do356j11n6mjk0dc0gelv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAui7fR3znamDlgIrcDvKVAJPCUCKx4QJI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "563709567668-hq4j13140l6do356j11n6mjk0dc0gelv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-8758740980137529~7003158011"
+    }
+  ],
+  "configuration_version": "1"
+}

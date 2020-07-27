@@ -40,9 +40,8 @@
           RowSpacing="0">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="96"/>
+            <RowDefinition Height="98"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="112"/>
         </Grid.RowDefinitions>
 
@@ -51,7 +50,7 @@
                Padding="0, 0, 0, 8">
 
             <views:AdMobView AdUnitId="{Binding AdUnitID}"
-                            BackgroundColor="{StaticResource AdPrimary}"/>
+                             BackgroundColor="{StaticResource AdPrimary}"/>
         </Frame>
 
         <Frame Grid.Row="1"
@@ -143,7 +142,7 @@
             </FlexLayout>
         </Grid>
 
-        <Frame Grid.Row="3"
+        <Frame Grid.Row="2"
                BackgroundColor="{StaticResource Secondary}"
                Padding="0, 8, 0, 0">
 
