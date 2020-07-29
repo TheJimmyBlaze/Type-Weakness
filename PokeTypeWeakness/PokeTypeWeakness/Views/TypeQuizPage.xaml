@@ -26,6 +26,9 @@
             <Color x:Key="Foreground">#E6E6E6</Color>
             <Color x:Key="Highlight">#FFFFFF</Color>
             <Color x:Key="TextColour">#FFFFFF</Color>
+            <Color x:Key="InvertedTextColour">#4D4D4D</Color>
+
+            <Color x:Key="TranslucentFade">#4D4D4D</Color>
 
             <converters:TypeQuizIsTypeSelectedConverter x:Key="SelectedConverter"/>
 
@@ -36,132 +39,333 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid BackgroundColor="{StaticResource Foreground}"
-          RowSpacing="0">
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="98"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="112"/>
-        </Grid.RowDefinitions>
-
-        <Frame Grid.Row="0" 
-               BackgroundColor="{StaticResource AdSecondary}"
-               Padding="0, 0, 0, 8">
-
-            <views:AdMobView AdUnitId="{Binding AdUnitID}"
-                             BackgroundColor="{StaticResource AdPrimary}"/>
-        </Frame>
-
-        <Frame Grid.Row="1"
-               Padding="0, 0, 16, 0"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"
-               BackgroundColor="{Binding QuizSubjectType.SecondaryColour}"
-               x:Name="QuizImage">
-
-            <Frame Grid.Column="0"
-                   Padding="16"
-                   BackgroundColor="{Binding QuizSubjectType.PrimaryColour}">
-
-                <Image WidthRequest="196"
-                       Source="{Binding QuizSubjectType.Image}"/>
-            </Frame>
-        </Frame>
-
-        <Grid Grid.Row="2"
-              BackgroundColor="{StaticResource Background}"
+    <Grid>
+        <Grid BackgroundColor="{StaticResource Foreground}"
               RowSpacing="0">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="56"/>
+                <RowDefinition Height="90"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="112"/>
             </Grid.RowDefinitions>
 
-            <Frame Grid.Row="0" 
-                   Padding="0, 8, 0, 0"
-                   BackgroundColor="{StaticResource Secondary}">
+            <views:AdMobView Grid.Row="0" AdUnitId="{Binding AdUnitID}"
+                                BackgroundColor="{StaticResource AdPrimary}"/>
 
-                <Frame BackgroundColor="{StaticResource Primary}">
+            <Frame Grid.Row="1"
+                   Padding="0, 0, 16, 0"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   BackgroundColor="{Binding QuizSubjectType.SecondaryColour}"
+                   x:Name="QuizImage">
 
-                    <Label FontSize="Medium"
-                           Margin="16, 8"
-                           TextColor="{StaticResource Highlight}"
-                           Text="{Binding NumberOfWeaknessesText}"
-                           x:Name="WeaknessLabel"/>
+                <Frame Grid.Column="0"
+                       Padding="16"
+                       BackgroundColor="{Binding QuizSubjectType.PrimaryColour}">
+
+                    <Image WidthRequest="196"
+                           Source="{Binding QuizSubjectType.Image}"/>
                 </Frame>
             </Frame>
 
-            <FlexLayout Grid.Row="1" 
-                        BindableLayout.ItemsSource="{Binding PokeTypes}"
-                        Direction="Row"
-                        AlignContent="Center"
-                        JustifyContent="Center"
-                        Wrap="Wrap"
-                        Margin="0, 8">
-                
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate>
-                        
-                        <Grid WidthRequest="56"
-                              HeightRequest="56"
-                              Margin="4"
-                              VerticalOptions="Center">
+            <Grid Grid.Row="2"
+                  BackgroundColor="{StaticResource Background}"
+                  RowSpacing="0">
 
-                            <Frame CornerRadius="360"
-                                   Padding="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="56"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-                                <Frame.Style>
-                                    <Style TargetType="Frame">
-                                        <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Frame Grid.Row="0" 
+                       Padding="0, 8, 0, 0">
+
+                    <Frame.Style>
+                        <Style TargetType="Frame">
+                            <Setter Property="BackgroundColor" Value="{StaticResource AffirmativeSecondary}"/>
+                            <Style.Triggers>
+                                <DataTrigger TargetType="Frame"
+                                             Binding="{Binding IsWeaknessQuiz}"
+                                             Value="True">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource NegativeSecondary}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Frame.Style>
+
+                    <Grid>
+
+                        <Frame>
+                            <Button CornerRadius="0"
+                                    Clicked="ToggleIsWeaknessType">
+                            
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="BackgroundColor" Value="{StaticResource AffirmativePrimary}"/>
                                         <Style.Triggers>
-                                            <DataTrigger TargetType="Frame" 
-                                                         Binding="{Binding Elected}"
-                                                         Value="True">
-                                                <Setter Property="BackgroundColor" Value="{StaticResource Highlight}"/>
+                                            <DataTrigger TargetType="Button"
+                                                     Binding="{Binding IsWeaknessQuiz}"
+                                                     Value="True">
+                                                <Setter Property="BackgroundColor" Value="{StaticResource NegativePrimary}"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
-                                </Frame.Style>
-                                
-                                <Frame CornerRadius="360">
-                                    <Button BackgroundColor="{Binding PrimaryColour}"
-                                            Clicked="ElectType"/>
-                                </Frame>
-                            </Frame>
+                                </Button.Style>
+                            </Button>
+                        </Frame>
 
-                            <Image Source="{Binding Image}"
-                                   WidthRequest="24"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"
-                                   InputTransparent="True"/>
+                        <Grid Margin="16, 8"
+                              InputTransparent="True"
+                              x:Name="WeaknessLabel">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="24"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="48"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Source" Value="strength_icon.png"/>
+                                        <Style.Triggers>
+                                            <DataTrigger TargetType="Image"
+                                                         Binding="{Binding IsWeaknessQuiz}"
+                                                         Value="True">
+                                                <Setter Property="Source" Value="weakness_icon.png"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+
+                            <Label Grid.Column="1" 
+                                   FontSize="Medium"
+                                   Margin="8, 0"
+                                   TextColor="{StaticResource Highlight}"
+                                   Text="{Binding NumberOfElectablesText}"
+                                   VerticalTextAlignment="Center"/>
+
+                            <Image Grid.Column="2">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Source" Value="toggle_off_icon.png"/>
+                                        <Style.Triggers>
+                                            <DataTrigger TargetType="Image"
+                                                         Binding="{Binding IsWeaknessQuiz}"
+                                                         Value="True">
+                                                <Setter Property="Source" Value="toggle_on_icon.png"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
                         </Grid>
+                    </Grid>
+                </Frame>
+
+                <FlexLayout Grid.Row="1" 
+                            BindableLayout.ItemsSource="{Binding PokeTypes}"
+                            Direction="Row"
+                            AlignContent="Center"
+                            JustifyContent="Center"
+                            Wrap="Wrap"
+                            Margin="0, 8">
+                
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
                         
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </FlexLayout>
-        </Grid>
+                            <Grid WidthRequest="56"
+                                  HeightRequest="56"
+                                  Margin="4"
+                                  VerticalOptions="Center">
 
-        <Frame Grid.Row="2"
-               BackgroundColor="{StaticResource Secondary}"
-               Padding="0, 8, 0, 0">
+                                <Frame CornerRadius="360"
+                                       Padding="4">
 
-            <Frame BackgroundColor="{StaticResource Primary}"
-                   Padding="16, 16, 16, 24">
+                                    <Frame.Style>
+                                        <Style TargetType="Frame">
+                                            <Setter Property="BackgroundColor" Value="Transparent"/>
+                                            <Style.Triggers>
+                                                <DataTrigger TargetType="Frame" 
+                                                             Binding="{Binding Elected}"
+                                                             Value="True">
+                                                    <Setter Property="BackgroundColor" Value="{StaticResource Highlight}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Frame.Style>
+                                
+                                    <Frame CornerRadius="360">
+                                        <Button BackgroundColor="{Binding PrimaryColour}"
+                                                Clicked="ElectType"/>
+                                    </Frame>
+                                </Frame>
 
-                <Frame BackgroundColor="{StaticResource AffirmativeSecondary}"
-                       Padding="0, 0, 0, 8">
+                                <Image Source="{Binding Image}"
+                                       WidthRequest="24"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       InputTransparent="True"/>
+                            </Grid>
+                        
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </FlexLayout>
+            </Grid>
 
-                    <Button BackgroundColor="{StaticResource AffirmativePrimary}"
-                            TextColor="{StaticResource TextColour}"
-                            Text="Submit Answer"
-                            CornerRadius="0"
-                            ImageSource="submit_icon"
-                            Padding="24, 4"
-                            Clicked="Submit"/>
+            <Frame Grid.Row="3"
+                   BackgroundColor="{StaticResource Secondary}"
+                   Padding="0, 8, 0, 0">
+
+                <Frame BackgroundColor="{StaticResource Primary}"
+                       Padding="16, 16, 16, 24">
+
+                    <Frame BackgroundColor="{StaticResource AffirmativeSecondary}"
+                           Padding="0, 0, 0, 8">
+
+                        <Button BackgroundColor="{StaticResource AffirmativePrimary}"
+                                TextColor="{StaticResource TextColour}"
+                                Text="Submit Answer"
+                                CornerRadius="0"
+                                ImageSource="submit_icon"
+                                Padding="24, 4"
+                                Clicked="Submit"/>
+                    </Frame>
                 </Frame>
             </Frame>
-        </Frame>
         
+        </Grid>
+
+        <Grid>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="IsVisible" Value="False" />
+                    <Setter Property="InputTransparent" Value="True"/>
+                    <Style.Triggers>
+                        <DataTrigger TargetType="Grid"
+                                     Binding="{Binding ShowCongratulations}"
+                                     Value="True">
+                            <Setter Property="IsVisible" Value="True"/>
+                            <Setter Property="InputTransparent" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+
+            <Frame HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"
+                   BackgroundColor="{StaticResource TranslucentFade}"
+                   Opacity="0.75">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="CongratulationsDismissed"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <Frame HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   WidthRequest="312"
+                   HeightRequest="480"
+                   BackgroundColor="{StaticResource Foreground}">
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="56"/>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="56"/>
+                    </Grid.RowDefinitions>
+
+                    <Frame Grid.Row="0" 
+                           BackgroundColor="{StaticResource Secondary}"
+                           Padding="0, 0, 0, 8">
+
+                        <Frame BackgroundColor="{StaticResource Primary}"
+                               Padding="8">
+
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="48"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" 
+                                       Source="celebrate_icon.png"/>
+
+                                <Label Grid.Column="1"
+                                       FontSize="Medium"
+                                       TextColor="{StaticResource TextColour}"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Center">
+                                    Correct
+                                </Label>
+
+                                <Image Grid.Column="2" 
+                                       Source="celebrate_icon.png"
+                                       ScaleX="-1"/>
+                            </Grid>
+                        </Frame>
+                    </Frame>
+
+                    <Label Grid.Row="1" 
+                           TextColor="{StaticResource InvertedTextColour}"
+                           BackgroundColor="{StaticResource Highlight}"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center"
+                           Text="{Binding CongratulationsMessage}"/>
+
+                    <StackLayout Grid.Row="2"
+                                 Orientation="Vertical"
+                                 BindableLayout.ItemsSource="{Binding CorrectPokeTypes}"
+                                 Margin="0, 16">
+                        
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+
+                                <Frame BackgroundColor="{StaticResource Background}" 
+                                       CornerRadius="360"
+                                        Margin="16, 2">
+                                    <Grid>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="48"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Frame Grid.Column="0"
+                                               CornerRadius="360"
+                                               BackgroundColor="{Binding PrimaryColour}"
+                                               Padding="0, 12"
+                                               Margin="-4, 0, 0, 0">
+                                            <Image Source="{Binding Image}"
+                                                   HeightRequest="24"
+                                                   WidthRequest="24"/>
+                                        </Frame>
+
+                                        <Label Grid.Column="1"
+                                               TextColor="{StaticResource TextColour}"
+                                               Text="{Binding DisplayName}"
+                                               VerticalTextAlignment="Center"
+                                               Margin="8, 0"/>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+
+                    <Frame Grid.Row="3" 
+                           BackgroundColor="{StaticResource AffirmativeSecondary}"
+                           Padding="0, 0, 0, 8">
+                        <Button BackgroundColor="{StaticResource AffirmativePrimary}"
+                                Text="Dismiss"
+                                Clicked="CongratulationsDismissed"/>
+                    </Frame>
+                </Grid>
+            </Frame>
+        </Grid>
     </Grid>
 </ContentPage>

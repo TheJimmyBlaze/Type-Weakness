@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PokeTypeWeakness.ViewModels
 {
@@ -13,10 +13,64 @@ namespace PokeTypeWeakness.ViewModels
         public PokeType QuizSubjectType { get; set; }
         public ObservableCollection<ElectablePokeType> PokeTypes { get; set; }
 
-        public int NumWeaknesses { get { return QuizSubjectType.Weaknesses.Count; } }
+        private bool isWeaknessQuiz = true;
+        public bool IsWeaknessQuiz
+        {
+            get { return isWeaknessQuiz; }
+            set
+            {
+                isWeaknessQuiz = value;
+                OnPropertyChanged(nameof(IsWeaknessQuiz));
+                OnPropertyChanged(nameof(NumberOfElectablesText));
+                OnPropertyChanged(nameof(CongratulationsMessage));
+            }
+        }
+
+        private bool showCongratulations = false;
+        public bool ShowCongratulations
+        {
+            get { return showCongratulations; }
+            set
+            {
+                showCongratulations = value;
+                OnPropertyChanged(nameof(ShowCongratulations));
+            }
+        }
+
+        private ObservableCollection<PokeType> correctPokeTypes;
+        public ObservableCollection<PokeType> CorrectPokeTypes
+        {
+            get
+            {
+                if (correctPokeTypes == null)
+                    correctPokeTypes = new ObservableCollection<PokeType>();
+                return correctPokeTypes;
+            }
+            set
+            {
+                correctPokeTypes = value;
+                OnPropertyChanged(nameof(CorrectPokeTypes));
+            }
+        }
+
+        public int NumCorrectTypes { get { return correctPokeTypes.Count; } }
         public int NumElections { get { return PokeTypes.Where(x => x.Elected).Count(); } }
 
-        public string NumberOfWeaknessesText { get { return string.Format("Find {0} {1} Weaknesses", NumWeaknesses, QuizSubjectType.DisplayName); } }
+        public string NumberOfElectablesText
+        {
+            get
+            {
+                return string.Format("Find {0} {1} {2}",
+                                    NumCorrectTypes, 
+                                    QuizSubjectType.DisplayName, 
+                                    isWeaknessQuiz ? "Weaknesses" : "Strengths"); 
+            } 
+        }
+
+        public string CongratulationsMessage
+        {
+            get { return string.Format("{0} types are {1}", QuizSubjectType.DisplayName, isWeaknessQuiz ? "Weak against" : "Strong Against"); }
+        }
 
         public TypeQuizViewModel(IEnumerable<PokeType> pokeTypes)
         {
@@ -31,14 +85,37 @@ namespace PokeTypeWeakness.ViewModels
             ElectQuizSubject();
         }
 
+        public async void ToggleIsWeaknessQuiz()
+        {
+            IsWeaknessQuiz = !IsWeaknessQuiz;
+            await LoadStrengthsOrWeaknesses();
+        }
+
         async void ElectQuizSubject()
         {
             int subjectIndex = random.Next(0, PokeTypes.Count);
             QuizSubjectType = PokeTypes[subjectIndex];
-            await QuizSubjectType.LoadWeaknesses();
+
+            await LoadStrengthsOrWeaknesses();
 
             OnPropertyChanged(nameof(QuizSubjectType));
-            OnPropertyChanged(nameof(NumberOfWeaknessesText));
+        }
+
+        async Task LoadStrengthsOrWeaknesses()
+        {
+            if (isWeaknessQuiz)
+            {
+                await QuizSubjectType.LoadWeaknesses();
+                CorrectPokeTypes = QuizSubjectType.Weaknesses;
+            }
+            else
+            {
+                await QuizSubjectType.LoadStrengths();
+                CorrectPokeTypes = QuizSubjectType.Strengths;
+            }
+
+            OnPropertyChanged(nameof(NumberOfElectablesText));
+            OnPropertyChanged(nameof(CongratulationsMessage));
         }
 
         public void ClearElections(bool keepCorrectElections = false)
@@ -58,8 +135,7 @@ namespace PokeTypeWeakness.ViewModels
         {
             if (AreElectionsCorrect())
             {
-                ElectQuizSubject();
-                ClearElections();
+                ShowCongratulations = true;
                 return true;
             }
 
@@ -71,7 +147,7 @@ namespace PokeTypeWeakness.ViewModels
         {
             IEnumerable<string> elections = PokeTypes.Where(x => x.Elected).Select(x => x.NaturalID);
 
-            if (elections.Count() != QuizSubjectType.WeaknessNaturalIDs.Count())
+            if (elections.Count() != correctPokeTypes.Count())
                 return false;
 
             foreach (string election in elections)
@@ -85,7 +161,15 @@ namespace PokeTypeWeakness.ViewModels
 
         bool IsElectionCorrect(string naturalID)
         {
-            return QuizSubjectType.WeaknessNaturalIDs.Contains(naturalID);
+            return correctPokeTypes.Select(x => x.NaturalID).Contains(naturalID);
+        }
+
+        public void DismissCongratulations()
+        {
+            ShowCongratulations = false;
+
+            ElectQuizSubject();
+            ClearElections();
         }
     }
 }

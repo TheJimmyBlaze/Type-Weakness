@@ -50,19 +50,28 @@ namespace PokeTypeWeakness.Views
             BindableObject layout = (BindableObject)sender;
 
             ElectablePokeType pokeType = (ElectablePokeType)layout.BindingContext;
-            if (viewModel.NumWeaknesses > viewModel.NumElections ||
+            if (viewModel.NumCorrectTypes > viewModel.NumElections ||
                 pokeType.Elected)
                 pokeType.Elected = !pokeType.Elected;
             else
                 Shake(WeaknessLabel);
         }
 
-        void Submit(object sender, EventArgs e)
+        async void Submit(object sender, EventArgs e)
         {
             if (!viewModel.SubmitElections())
                 Shake(QuizImage);
-            else
-                Drop(QuizImage);
+        }
+
+        private void ToggleIsWeaknessType(object sender, EventArgs e)
+        {
+            viewModel.ToggleIsWeaknessQuiz();
+        }
+
+        private void CongratulationsDismissed(object sender, EventArgs e)
+        {
+            viewModel.DismissCongratulations();
+            Drop(QuizImage);
         }
     }
 }
