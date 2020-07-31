@@ -57,7 +57,7 @@ namespace PokeTypeWeakness.Views
                 Shake(WeaknessLabel);
         }
 
-        async void Submit(object sender, EventArgs e)
+        void Submit(object sender, EventArgs e)
         {
             if (!viewModel.SubmitElections())
                 Shake(QuizImage);

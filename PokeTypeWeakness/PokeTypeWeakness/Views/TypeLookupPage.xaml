@@ -110,7 +110,6 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        
         <Frame Grid.Row="2"
                BackgroundColor="{StaticResource Secondary}"
                Padding="0, 8, 0, 0">
@@ -118,17 +117,39 @@
             <Frame BackgroundColor="{StaticResource Primary}"
                    Padding="16">
 
-                <Frame BackgroundColor="{StaticResource AffirmativeSecondary}"
-                       Padding="0, 0, 0, 8">
+                <Grid Grid.Row="2"
+                      ColumnSpacing="8">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="78"/>
+                    </Grid.ColumnDefinitions>
                     
-                    <Button BackgroundColor="{StaticResource AffirmativePrimary}"
-                            TextColor="{StaticResource TextColour}"
-                            Text="Trainer Challenge"
-                            CornerRadius="0"
-                            ImageSource="pokedex_icon"
-                            Padding="24, 4"
-                            Clicked="StartQuiz"/>
-                </Frame>
+                    <Frame Grid.Column="0" 
+                           BackgroundColor="{StaticResource AffirmativeSecondary}"
+                           Padding="0, 0, 0, 8">
+
+                        <Button BackgroundColor="{StaticResource AffirmativePrimary}"
+                                TextColor="{StaticResource TextColour}"
+                                Text="Trainer Challenge"
+                                CornerRadius="0"
+                                ImageSource="pokedex_icon"
+                                Padding="24, 4"
+                                Clicked="StartQuiz"/>
+                    </Frame>
+
+                    <Frame Grid.Column="1" 
+                           BackgroundColor="{StaticResource AffirmativeSecondary}"
+                           Padding="0, 0, 0, 8">
+
+                        <Button BackgroundColor="{StaticResource AffirmativePrimary}"
+                                TextColor="{StaticResource TextColour}"
+                                CornerRadius="0"
+                                ImageSource="about_icon"
+                                Padding="24, 4"
+                                Clicked="ShowAttributions"/>
+                    </Frame>
+                </Grid>
             </Frame>
         </Frame>
     </Grid>

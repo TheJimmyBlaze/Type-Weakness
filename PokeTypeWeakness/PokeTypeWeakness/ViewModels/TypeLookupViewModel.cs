@@ -22,7 +22,6 @@ namespace PokeTypeWeakness.ViewModels
 
         private async void ExecuteLoadTypesCommand()
         {
-            PokeTypes.Clear();
             IEnumerable<PokeType> pokeTypes = await DataStore.GetItemsAsync();
             foreach (PokeType pokeType in pokeTypes)
             {

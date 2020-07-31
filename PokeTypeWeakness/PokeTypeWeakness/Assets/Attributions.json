@@ -1,0 +1,34 @@
+﻿[
+  {
+    "Name": "Pokemon Sword & Shield",
+    "Address": "https://swordshield.pokemon.com/en-us/",
+    "Comment": "Strengths and Weakneses based on the 8th generation of Pokemon games.",
+    "Image": "pokeball_icon.png",
+    "PrimaryColourHex": "#E84848",
+    "SecondaryColourHex": "#974C49"
+  },
+  {
+    "Name": "Icons8",
+    "Address": "https://icons8.com/",
+    "Comment": "Big thanks to Icons8 for the icons. They do great work, show em some love.",
+    "Image": "icons8_icon.png",
+    "PrimaryColourHex": "#54B947",
+    "SecondaryColourHex": "#46A047"
+  },
+  {
+    "Name": "My Github",
+    "Address": "https://github.com/TheJimmyBlaze",
+    "Comment": "Check out the source code for this app, and a bunch of other cool stuff.",
+    "Image": "github_icon.png",
+    "PrimaryColourHex": "#282828",
+    "SecondaryColourHex": "#0F0F0F"
+  },
+  {
+    "Name": "duiker101's Github",
+    "Address": "https://github.com/duiker101/pokemon-type-svg-icons",
+    "Comment": "Thanks to duiker101 for his PokeType SVGs, get them for yourself here.",
+    "Image": "github_icon.png",
+    "PrimaryColourHex": "#282828",
+    "SecondaryColourHex": "#0F0F0F"
+  }
+]

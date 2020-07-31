@@ -318,6 +318,39 @@
                            HorizontalTextAlignment="Center"
                            Text="{Binding CongratulationsMessage}"/>
 
+                    <Grid Grid.Row="2"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center"
+                          Opacity="0.8">
+
+                        <Grid.Style>
+                            <Style TargetType="Grid">
+                                <Setter Property="IsVisible" Value="False"/>
+                                <Style.Triggers>
+                                    <DataTrigger TargetType="Grid"
+                                                 Binding="{Binding CorrectPokeTypes.Count}"
+                                                 Value="0">
+                                        <Setter Property="IsVisible" Value="True"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="48"/>
+                            <RowDefinition Height="24"/>
+                        </Grid.RowDefinitions>
+
+                        <Image Grid.Row="0" 
+                               Source="thinking_icon"/>
+
+                        <Label Grid.Row="1"
+                               TextColor="{StaticResource InvertedTextColour}"
+                               HorizontalTextAlignment="Center">
+                            Nothing?
+                        </Label>
+                    </Grid>
+
                     <StackLayout Grid.Row="2"
                                  Orientation="Vertical"
                                  BindableLayout.ItemsSource="{Binding CorrectPokeTypes}"
@@ -325,34 +358,34 @@
                         
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
+                                
+                                <Grid ColumnSpacing="0"
+                                      Margin="8, 0">
 
-                                <Frame BackgroundColor="{StaticResource Background}" 
-                                       CornerRadius="360"
-                                        Margin="16, 2">
-                                    <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="64"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
 
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="48"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-
+                                    <Frame Grid.Column="0"
+                                           BackgroundColor="{Binding SecondaryColour}"
+                                           Padding="0, 0, 8, 0">
                                         <Frame Grid.Column="0"
-                                               CornerRadius="360"
                                                BackgroundColor="{Binding PrimaryColour}"
-                                               Padding="0, 12"
-                                               Margin="-4, 0, 0, 0">
+                                               Padding="0, 12">
                                             <Image Source="{Binding Image}"
-                                                   HeightRequest="24"
-                                                   WidthRequest="24"/>
+                                                   HeightRequest="32"
+                                                   WidthRequest="32"/>
                                         </Frame>
+                                    </Frame>
 
-                                        <Label Grid.Column="1"
-                                               TextColor="{StaticResource TextColour}"
-                                               Text="{Binding DisplayName}"
-                                               VerticalTextAlignment="Center"
-                                               Margin="8, 0"/>
-                                    </Grid>
-                                </Frame>
+                                    <Label Grid.Column="1"
+                                           BackgroundColor="{StaticResource Background}"
+                                           TextColor="{StaticResource TextColour}"
+                                           Text="{Binding DisplayName}"
+                                           VerticalTextAlignment="Center"
+                                           Padding="16, 0"/>
+                                </Grid>
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
                     </StackLayout>

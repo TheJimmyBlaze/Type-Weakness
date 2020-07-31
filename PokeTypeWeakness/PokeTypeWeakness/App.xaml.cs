@@ -14,6 +14,7 @@ namespace PokeTypeWeakness
             InitializeComponent();
 
             DependencyService.Register<PokeTypeStore>();
+            DependencyService.Register<AttributionStore>();
             DependencyService.Register<Random>();
 
             MainPage = new AppShell();

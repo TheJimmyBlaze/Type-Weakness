@@ -42,5 +42,10 @@ namespace PokeTypeWeakness.Views
             await Task.Run(() => { typeQuizViewModel = new TypeQuizViewModel(viewModel.PokeTypes); });
             await Navigation.PushAsync(new TypeQuizPage(typeQuizViewModel));
         }
+
+        async void ShowAttributions(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AttributionPage());
+        }
     }
 }
