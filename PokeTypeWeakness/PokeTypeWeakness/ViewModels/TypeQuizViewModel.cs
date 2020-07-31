@@ -69,7 +69,7 @@ namespace PokeTypeWeakness.ViewModels
 
         public string CongratulationsMessage
         {
-            get { return string.Format("{0} types are {1}", QuizSubjectType.DisplayName, isWeaknessQuiz ? "Weak against" : "Strong Against"); }
+            get { return string.Format("{0} types are {1}", QuizSubjectType.DisplayName, isWeaknessQuiz ? "weak against" : "strong against"); }
         }
 
         public TypeQuizViewModel(IEnumerable<PokeType> pokeTypes)
