@@ -10,7 +10,7 @@ using Android.Content.Res;
 
 namespace PokeTypeWeakness.Droid
 {
-    [Activity(Label = "Pokemon Type Weaknesses", Icon = "@mipmap/pokemon_icon", Theme = "@style/MainTheme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "Pokemon Type Weaknesses", Icon = "@mipmap/type_icon", Theme = "@style/MainTheme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
