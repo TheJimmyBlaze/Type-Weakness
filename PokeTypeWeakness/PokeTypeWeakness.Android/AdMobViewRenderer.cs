@@ -11,6 +11,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Google.Ads.Mediation.Admob;
 using PokeTypeWeakness.Droid;
 using PokeTypeWeakness.Views;
 using Xamarin.Forms;
@@ -21,6 +22,9 @@ namespace PokeTypeWeakness.Droid
 {
 	public class AdMobViewRenderer : ViewRenderer<AdMobView, AdView>
 	{
+		private const string MAX_AD_CONTENT_RATING = "max_ad_content_rating";
+		private const string AD_CONTENT_RATING_G = "G";
+
 		public AdMobViewRenderer(Context context) : base(context) { }
 
         protected override void OnElementChanged(ElementChangedEventArgs<AdMobView> e)
@@ -50,7 +54,15 @@ namespace PokeTypeWeakness.Droid
 
 			adView.LayoutParameters = new LinearLayout.LayoutParams(LayoutParams.MatchParent, LayoutParams.MatchParent);
 
-			adView.LoadAd(new AdRequest.Builder().Build());
+			Bundle extras = new Bundle();
+			extras.PutString(MAX_AD_CONTENT_RATING, AD_CONTENT_RATING_G);
+
+			AdRequest.Builder builder = new AdRequest.Builder();
+			builder.AddNetworkExtrasBundle(Java.Lang.Class.FromType(typeof(AdMobAdapter)), extras);
+			builder.TagForChildDirectedTreatment(true);
+
+			AdRequest request = builder.Build();
+			adView.LoadAd(request);
 
 			return adView;
 		}
